@@ -28,7 +28,7 @@ async function scrapeProperty(page, url) {
         const match = url.match(/\/(\d+)(\/|$)/);
         external_id = match ? `fotocasa-${match[1]}` : `fotocasa-${Date.now()}`;
     } else if (source === 'idealista') {
-        const match = url.match(/inmueble\/(\d+)\//);
+        const match = url.match(/(?:inmueble|obra-nueva)\/(\d+)\//);
         external_id = match ? `idealista-${match[1]}` : `idealista-${Date.now()}`;
     } else {
         external_id = `manual-${Date.now()}`;
