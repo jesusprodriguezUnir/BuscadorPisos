@@ -1,0 +1,52 @@
+---
+import { Filter, SlidersHorizontal, ChevronDown } from 'lucide-astro';
+---
+
+<div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 mb-8 sticky top-24 z-30">
+  <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
+    
+    <div class="flex items-center gap-4 w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0 hide-scrollbar">
+      <button class="flex items-center gap-2 px-4 py-2.5 bg-blue-50 text-blue-700 font-semibold rounded-full shrink-0 transition-colors">
+        <Filter class="w-4 h-4" />
+        Todos los filtros
+      </button>
+      
+      <div class="h-6 w-px bg-slate-200 hidden lg:block shrink-0"></div>
+      
+      <button class="flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 text-slate-700 font-medium rounded-full hover:bg-slate-50 hover:border-slate-300 transition-colors shrink-0">
+        Precio
+        <ChevronDown class="w-4 h-4 text-slate-400" />
+      </button>
+      
+      <button class="flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 text-slate-700 font-medium rounded-full hover:bg-slate-50 hover:border-slate-300 transition-colors shrink-0">
+        Tipo de Inmueble
+        <ChevronDown class="w-4 h-4 text-slate-400" />
+      </button>
+      
+      <button class="flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 text-slate-700 font-medium rounded-full hover:bg-slate-50 hover:border-slate-300 transition-colors shrink-0">
+        Habitaciones
+        <ChevronDown class="w-4 h-4 text-slate-400" />
+      </button>
+    </div>
+
+    <div class="flex items-center gap-3 w-full lg:w-auto justify-between lg:justify-end border-t lg:border-t-0 border-slate-100 pt-3 lg:pt-0">
+      <span class="text-sm font-medium text-slate-500 whitespace-nowrap">Ordenar por:</span>
+      <button class="flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 font-semibold rounded-lg hover:bg-slate-200 transition-colors">
+        <SlidersHorizontal class="w-4 h-4" />
+        Más recientes
+      </button>
+    </div>
+    
+  </div>
+</div>
+
+<style>
+  /* Esconder barra de scroll en filtros horizontales */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>

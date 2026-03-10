@@ -1,0 +1,132 @@
+---
+import { ArrowDownRight, MapPin, Bed, Maximize, ExternalLink } from 'lucide-astro';
+
+interface PriceHistory {
+  price: number;
+  date_recorded: string;
+}
+
+interface Props {
+  id: string;
+  title: string;
+  url: string;
+  image_url: string;
+  current_price: number;
+  original_price: number;
+  location: string;
+  rooms: number;
+  size_sqm: number;
+  source: string;
+  price_history: PriceHistory[];
+}
+
+const prop = Astro.props;
+
+// Formateador de moneda
+const formatPrice = (price: number) => {
+  return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(price);
+};
+
+// Lógica para detectar si hubo bajada
+const getPriceDropInfo = (history: PriceHistory[], currentPrice: number) => {
+  if (!history || history.length < 2) return null;
+  
+  // Ordenar el historial por fecha descendente
+  const sortedHistory = [...history].sort((a, b) => new Date(b.date_recorded).getTime() - new Date(a.date_recorded).getTime());
+  
+  // Buscar el primer precio histórico que sea distinto y mayor al actual
+  const oldPriceRecord = sortedHistory.find((h) => h.price > currentPrice);
+  
+  if (oldPriceRecord) {
+     const dropAmount = oldPriceRecord.price - currentPrice;
+     const percentage = ((dropAmount / oldPriceRecord.price) * 100).toFixed(1);
+     return { dropAmount, percentage, oldPrice: oldPriceRecord.price };
+  }
+  return null;
+};
+
+const dropInfo = getPriceDropInfo(prop.price_history, prop.current_price);
+---
+
+<article class="premium-card group relative">
+  {/* Imagen */}
+  <div class="relative h-56 sm:h-64 overflow-hidden bg-slate-200">
+    <img 
+      src={prop.image_url || 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80'} 
+      alt={prop.title}
+      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
+    
+    <div class="absolute top-4 left-4 right-4 flex justify-between items-start">
+      <span class="bg-white/95 backdrop-blur-md text-slate-800 text-[10px] font-extrabold px-3 py-1.5 rounded-full shadow-sm uppercase tracking-wider">
+        {prop.source}
+      </span>
+      <button class="bg-white/20 hover:bg-white/40 backdrop-blur-md p-2 rounded-full text-white transition-colors" aria-label="Añadir a favoritos">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+      </button>
+    </div>
+
+    <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+      {dropInfo && (
+          <span class="bg-rose-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 animate-bounce">
+            <ArrowDownRight class="w-4 h-4" />
+            -{dropInfo.percentage}%
+          </span>
+      )}
+    </div>
+  </div>
+
+  {/* Contenido */}
+  <div class="p-6 flex-1 flex flex-col bg-white">
+    <div class="flex flex-col mb-4">
+      {dropInfo ? (
+        <div class="flex items-baseline gap-3">
+          <span class="text-3xl font-extrabold text-slate-900 tracking-tight">
+            {formatPrice(prop.current_price)}
+          </span>
+          <span class="text-sm text-slate-400 line-through font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+            {formatPrice(dropInfo.oldPrice)}
+          </span>
+        </div>
+      ) : (
+        <span class="text-3xl font-extrabold text-slate-900 tracking-tight">
+          {formatPrice(prop.current_price)}
+        </span>
+      )}
+    </div>
+
+    <h3 class="font-semibold text-[1.1rem] leading-snug mb-3 line-clamp-2 text-slate-800 group-hover:text-blue-600 transition-colors">
+      <a href={prop.url} target="_blank" rel="noopener noreferrer" class="focus:outline-none">
+          <span class="absolute inset-0" aria-hidden="true"></span>
+          {prop.title}
+      </a>
+    </h3>
+
+    <p class="text-slate-500 text-sm flex items-center gap-2 mb-6 line-clamp-1 font-medium bg-slate-50 w-fit px-3 py-1.5 rounded-lg">
+      <MapPin class="w-4 h-4 shrink-0 text-blue-500" />
+      {prop.location || 'Ubicación desconocida'}
+    </p>
+
+    <div class="mt-auto pt-5 border-t border-slate-100 flex items-center justify-between text-slate-600 text-sm font-semibold">
+      <div class="flex items-center gap-5">
+        {prop.rooms > 0 && (
+          <span class="flex items-center gap-2" title="Habitaciones">
+            <Bed class="w-5 h-5 text-slate-400" />
+            {prop.rooms}
+          </span>
+        )}
+        {prop.size_sqm > 0 && (
+          <span class="flex items-center gap-2" title="Metros cuadrados">
+            <Maximize class="w-5 h-5 text-slate-400" />
+            {prop.size_sqm} m²
+          </span>
+        )}
+      </div>
+      <a href={prop.url} target="_blank" rel="noopener noreferrer" class="relative z-10 w-8 h-8 flex items-center justify-center rounded-full bg-slate-50 hover:bg-blue-50 text-slate-400 hover:text-blue-600 transition-colors">
+        <ExternalLink class="w-4 h-4" />
+      </a>
+    </div>
+  </div>
+</article>

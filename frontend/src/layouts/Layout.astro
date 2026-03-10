@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Descubre las mejores oportunidades del mercado inmobiliario en tiempo real." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | Radar Inmobiliario</title>
+	</head>
+	<body class="min-h-screen flex flex-col">
+		<header class="glass-header">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+				<a href="/" class="flex items-center gap-3 transition-transform hover:scale-105 active:scale-95 text-blue-600">
+					<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M3 21h18"></path><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path><path d="M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"></path><path d="M9 7h6"></path><path d="M9 11h6"></path>
+					</svg>
+					<span class="text-2xl font-extrabold tracking-tight text-slate-900">
+						Radar<span class="gradient-text">Inmobiliario</span>
+					</span>
+				</a>
+				
+				<nav class="hidden md:flex items-center gap-8 font-medium text-slate-600">
+					<a href="/" class="hover:text-blue-600 transition-colors">Explorar</a>
+					<a href="#" class="hover:text-blue-600 transition-colors">Mapa</a>
+					<a href="#" class="hover:text-blue-600 transition-colors">Alertas</a>
+				</nav>
+        
+        <div class="flex items-center gap-4">
+          <button class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-full transition-colors">
+            Iniciar Sesión
+          </button>
+          <button class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/25 rounded-full transition-all">
+            Anunciar
+          </button>
+        </div>
+			</div>
+		</header>
+
+		<main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+			<slot />
+		</main>
+		
+		<footer class="bg-white border-t border-slate-200 mt-auto">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+				<div class="flex items-center gap-2">
+					<span class="text-xl font-bold text-slate-900">Radar<span class="text-blue-600">Inmobiliario</span></span>
+				</div>
+				<p class="text-slate-500 text-sm">
+					&copy; {new Date().getFullYear()} Radar Inmobiliario. Todos los derechos reservados.
+				</p>
+			</div>
+		</footer>
+	</body>
+</html>

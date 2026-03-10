@@ -1,0 +1,28 @@
+[
+    {
+        "url": "https://www.fotocasa.es/es/comprar/vivienda/la-pobla-de-farnals/terraza-ascensor/188281218/d",
+        "external_id": "fotocasa-188281218",
+        "source": "fotocasa",
+        "title": "Piso en venta en Avenida Constitución, Platja de la Pobla de Farnals",
+        "current_price": 195000,
+        "rooms": 2,
+        "size_sqm": 61,
+        "location": "Platja de la Pobla de Farnals",
+        "image_url": "https://static.fotocasa.es/images/ads/826fba25-1ee6-408a-b5de-34df6e2e2c92?rule=web_948x542_ar",
+        "bathrooms": 1,
+        "is_favorite": true
+    },
+    {
+        "url": "https://www.fotocasa.es/es/comprar/vivienda/la-pobla-de-farnals/zona-comunitaria-ascensor-piscina-no-amueblado/188241811/d",
+        "external_id": "fotocasa-188241811",
+        "source": "fotocasa",
+        "title": "Piso en venta en Carrer Llari, 1, Platja de la Pobla de Farnals",
+        "current_price": 220000,
+        "rooms": 2,
+        "size_sqm": 75,
+        "location": "Platja de la Pobla de Farnals",
+        "image_url": "https://static.fotocasa.es/images/ads/d509bb75-f19c-4db2-8934-cc8467f81253?rule=web_948x542_ar",
+        "bathrooms": 1,
+        "is_favorite": true
+    }
+]

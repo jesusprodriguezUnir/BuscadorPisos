@@ -1,0 +1,70 @@
+---
+import { Search, MapPin } from 'lucide-astro';
+---
+
+<section class="relative pt-16 pb-20 lg:pt-24 lg:pb-28 overflow-hidden rounded-3xl mb-12">
+  {/* Background Decorativo */}
+  <div class="absolute inset-0 bg-blue-600">
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800"></div>
+    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] mix-blend-overlay opacity-20 object-cover"></div>
+  </div>
+  
+  <div class="absolute top-0 right-0 -translate-y-12 translate-x-1/3">
+    <div class="w-96 h-96 bg-blue-400/30 rounded-full blur-3xl"></div>
+  </div>
+  <div class="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3">
+    <div class="w-[500px] h-[500px] bg-purple-500/30 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white/90 text-sm font-medium mb-6 backdrop-blur-sm border border-white/20">
+      <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+      Rastreo en tiempo real
+    </span>
+    
+    <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white tracking-tight mb-8 leading-tight">
+      Encuentra la casa de tus sueños, <br class="hidden md:block" />
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-cyan-200">
+        al precio perfecto.
+      </span>
+    </h1>
+    
+    <p class="text-lg md:text-xl text-blue-100 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
+      Rastreamos todos los portales inmobiliarios para traerte las mejores oportunidades, bajadas de precio e inversiones rentables antes que nadie.
+    </p>
+
+    {/* Buscador Principal */}
+    <div class="bg-white p-2 rounded-full shadow-2xl max-w-3xl mx-auto flex flex-col md:flex-row gap-2 relative z-20">
+      <div class="flex-1 flex items-center px-4 py-2 md:py-0 border-b md:border-b-0 md:border-r border-slate-100">
+        <MapPin class="w-5 h-5 text-slate-400 shrink-0" />
+        <input 
+          type="text" 
+          placeholder="¿Dónde quieres vivir? (Ej. Madrid, Barcelona)" 
+          class="w-full bg-transparent border-none focus:ring-0 text-slate-700 placeholder:text-slate-400 px-3 py-2 outline-none font-medium text-base"
+        />
+      </div>
+      <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 transition-all hover:shadow-lg hover:shadow-blue-500/30">
+        <Search class="w-5 h-5" />
+        Buscar Ahora
+      </button>
+    </div>
+
+    {/* Estadísticas rápidas */}
+    <div class="mt-12 flex items-center justify-center gap-8 md:gap-16 text-white/80 text-sm font-medium">
+      <div class="flex flex-col items-center gap-1">
+        <span class="text-3xl font-bold text-white tracking-tight">+10k</span>
+        <span class="uppercase tracking-wider text-white/60 text-xs">Propiedades</span>
+      </div>
+      <div class="w-px h-8 bg-white/20"></div>
+      <div class="flex flex-col items-center gap-1">
+        <span class="text-3xl font-bold text-white tracking-tight">3</span>
+        <span class="uppercase tracking-wider text-white/60 text-xs">Portales Analizados</span>
+      </div>
+      <div class="w-px h-8 bg-white/20"></div>
+      <div class="flex flex-col items-center gap-1">
+        <span class="text-3xl font-bold text-white tracking-tight">24h</span>
+        <span class="uppercase tracking-wider text-white/60 text-xs">Actualización</span>
+      </div>
+    </div>
+  </div>
+</section>
